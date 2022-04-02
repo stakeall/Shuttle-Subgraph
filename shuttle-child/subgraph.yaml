@@ -1,0 +1,39 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ChildPool
+    network: mumbai
+    source:
+      address: "{{childPoolAddress}}"
+      abi: ChildPool
+      startBlock: {{childPoolBlockNumber}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Shuttle
+        - ShuttleUser
+        - ShuttleLifecyleEvent
+        - User
+      abis:
+        - name: ChildPool
+          file: ./abis/ChildPool.json
+      eventHandlers:
+        - event: Deposit(uint256,address,uint256)
+          handler: handleDeposit
+        - event: ShuttleArrived(uint256,uint256,uint8,uint256)
+          handler: handleShuttleArrived
+        - event: ShuttleCancelled(uint256)
+          handler: handleShuttleCancelled
+        - event: ShuttleCreated(uint256)
+          handler: handleShuttleCreated
+        - event: ShuttleExpired(uint256)
+          handler: handleShuttleExpired
+        - event: ShuttleEnrouted(uint256,uint256)
+          handler: handleShuttleEnrouted
+        - event: TokenClaimed(uint256,address,address,uint256)
+          handler: handleTokenClaimed
+      file: ./src/mapping.ts

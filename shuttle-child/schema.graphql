@@ -1,0 +1,61 @@
+enum ShuttleStatus {
+  Available,
+  Enroute,
+  Arrived,
+  Expired,
+  Cancelled
+}
+
+enum Position {
+  Deposited,
+  Claimed
+}
+
+""" 
+The ShuttleUser represents a User position in a Shuttle.
+"""
+type ShuttleUser @entity {
+  "Concatenation of the User id, Shuttle id"
+  id: ID!
+  "Amount user deposited"
+  amount: BigInt!
+  "The position of the amount either deposited or claimed"
+  position: Position!
+  user: User!
+  shuttle: Shuttle!
+}
+
+""" 
+The ShuttleLifecycleEvent keeps track of the timestamp and the block for each of the ShuttleStatus.
+"""
+type ShuttleLifecyleEvent @entity {
+  "Concatenation of the Shuttle id, ShuttleStatus"
+  id: ID!
+  status: ShuttleStatus!
+  shuttle: Shuttle!
+  "Timestamp of the block"
+  createdAt: Int!
+  createdAtBlock: Int!
+}
+
+type Shuttle @entity {
+  "Shuttle number"
+  id: ID!
+  fee: BigInt!
+  amount: BigInt!
+  expiry: BigInt!
+  status: ShuttleStatus!
+  "Amount of received stMatic, if shuttle arrives"
+  receivedAmount: BigInt!
+  "Users having positions in the shuttle"
+  users: [ShuttleUser!]! @derivedFrom (field: "shuttle")
+  "ShuttleStatus transitions"
+  timeline: [ShuttleLifecyleEvent!]! @derivedFrom (field: "shuttle")
+}
+
+type User @entity {
+  "User address"
+  id: ID!
+  "Shuttles in which the user has positions"
+  shuttles: [ShuttleUser!]! @derivedFrom (field: "user")
+}
