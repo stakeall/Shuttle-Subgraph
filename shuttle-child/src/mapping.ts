@@ -20,7 +20,6 @@ export function handleDeposit(event: Deposit): void {
 
   if (!shuttleUserEntity) {
     shuttleUserEntity = new ShuttleUser(shuttleUserId);
-    shuttleUserEntity.amount = event.params._amount;
     shuttleUserEntity.user = userId;
     shuttleUserEntity.position = "Deposited";
     shuttleUserEntity.shuttle = event.params._shuttlesNumber.toString();
