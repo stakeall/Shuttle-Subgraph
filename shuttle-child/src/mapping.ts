@@ -26,6 +26,7 @@ export function handleDeposit(event: Deposit): void {
   }
 
   shuttleUserEntity.amount = shuttleUserEntity.amount.plus(event.params._amount);
+  shuttleUserEntity.depositedAt = event.block.timestamp.toI32();
 
   let userEntity = User.load(userId);
 
@@ -49,6 +50,8 @@ export function handleTokenClaimed(event: TokenClaimed): void {
   let shuttleUserEntity = ShuttleUser.load(shuttleUserId)!;
 
   shuttleUserEntity.position = "Claimed";
+  shuttleUserEntity.claimedAmount = event.params._claimedAmount;
+  shuttleUserEntity.claimedAt = event.block.timestamp.toI32();
  
   shuttleUserEntity.save();
 }

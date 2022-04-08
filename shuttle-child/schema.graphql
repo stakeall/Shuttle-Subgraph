@@ -19,8 +19,11 @@ type ShuttleUser @entity {
   id: ID!
   "Amount user deposited"
   amount: BigInt!
+  claimedAmount: BigInt!
   "The position of the amount either deposited or claimed"
   position: Position!
+  depositedAt: Int!
+  claimedAt: Int!
   user: User!
   shuttle: Shuttle!
 }
