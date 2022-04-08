@@ -73,6 +73,7 @@ export function handleShuttleCreated(event: ShuttleCreated): void {
   shuttleLifecycleEventEntity.createdAtBlock = event.block.number.toI32();
   shuttleLifecycleEventEntity.status = shuttleStatus;
   shuttleLifecycleEventEntity.shuttle = shuttleId;
+  shuttleLifecycleEventEntity.txHash = event.transaction.hash;
 
   shuttleEntity.save();
   shuttleLifecycleEventEntity.save();
@@ -91,6 +92,7 @@ export function handleShuttleEnrouted(event: ShuttleEnrouted): void {
   shuttleLifecyleEventEntity.createdAt = event.block.timestamp.toI32();
   shuttleLifecyleEventEntity.createdAtBlock = event.block.number.toI32();
   shuttleLifecyleEventEntity.shuttle = shuttleId;
+  shuttleLifecyleEventEntity.txHash = event.transaction.hash;
   
   shuttleEntity.save();
   shuttleLifecyleEventEntity.save();
@@ -117,6 +119,7 @@ export function handleShuttleArrived(event: ShuttleArrived): void {
   shuttleLifecyleEventEntity.createdAt = event.block.timestamp.toI32();
   shuttleLifecyleEventEntity.createdAtBlock = event.block.number.toI32();
   shuttleLifecyleEventEntity.shuttle = shuttleId;
+  shuttleLifecyleEventEntity.txHash = event.transaction.hash;
 
   shuttleEntity.save();
   shuttleLifecyleEventEntity.save();
@@ -135,6 +138,7 @@ export function handleShuttleExpired(event: ShuttleExpired): void {
   shuttleLifecyleEventEntity.createdAt = event.block.timestamp.toI32();
   shuttleLifecyleEventEntity.createdAtBlock = event.block.number.toI32();
   shuttleLifecyleEventEntity.shuttle = shuttleId;
+  shuttleLifecyleEventEntity.txHash = event.transaction.hash;
 
   shuttleEntity.save();
   shuttleLifecyleEventEntity.save();
@@ -153,6 +157,7 @@ export function handleShuttleCancelled(event: ShuttleCancelled): void {
   shuttleLifecyleEntity.createdAt = event.block.timestamp.toI32();
   shuttleLifecyleEntity.createdAtBlock = event.block.number.toI32();
   shuttleLifecyleEntity.shuttle = id;
+  shuttleLifecyleEntity.txHash = event.transaction.hash;
 
   shuttle.save();
   shuttleLifecyleEntity.save();

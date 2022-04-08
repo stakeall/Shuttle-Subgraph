@@ -36,6 +36,7 @@ type ShuttleLifecyleEvent @entity {
   "Timestamp of the block"
   createdAt: Int!
   createdAtBlock: Int!
+  txHash: Bytes!
 }
 
 type Shuttle @entity {
