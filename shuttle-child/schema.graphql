@@ -19,8 +19,11 @@ type ShuttleUser @entity {
   id: ID!
   "Amount user deposited"
   amount: BigInt!
+  claimedAmount: BigInt!
   "The position of the amount either deposited or claimed"
   position: Position!
+  depositedAt: Int!
+  claimedAt: Int!
   user: User!
   shuttle: Shuttle!
 }
@@ -36,6 +39,7 @@ type ShuttleLifecyleEvent @entity {
   "Timestamp of the block"
   createdAt: Int!
   createdAtBlock: Int!
+  txHash: Bytes!
 }
 
 type Shuttle @entity {
@@ -45,6 +49,7 @@ type Shuttle @entity {
   amount: BigInt!
   expiry: BigInt!
   status: ShuttleStatus!
+  shuttleNumber: BigInt!
   "Amount of received stMatic, if shuttle arrives"
   receivedAmount: BigInt!
   "Users having positions in the shuttle"
