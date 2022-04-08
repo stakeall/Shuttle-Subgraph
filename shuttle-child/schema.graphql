@@ -45,6 +45,7 @@ type Shuttle @entity {
   amount: BigInt!
   expiry: BigInt!
   status: ShuttleStatus!
+  shuttleNumber: BigInt!
   "Amount of received stMatic, if shuttle arrives"
   receivedAmount: BigInt!
   "Users having positions in the shuttle"

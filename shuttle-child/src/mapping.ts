@@ -63,6 +63,7 @@ export function handleShuttleCreated(event: ShuttleCreated): void {
   shuttleEntity.amount = BigInt.fromI32(0);
   shuttleEntity.receivedAmount = BigInt.fromI32(0);
   shuttleEntity.fee = BigInt.fromI32(0);
+  shuttleEntity.shuttleNumber = event.params._shuttleNumber;
   
   let childPoolContract = ChildPool.bind(event.address);
   shuttleEntity.expiry = childPoolContract.shuttles(event.params._shuttleNumber).value3;
