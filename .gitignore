@@ -42,6 +42,8 @@ node_modules/
 jspm_packages/
 shuttle-child/build/
 shuttle-child/generated/
+shuttle-root/build/
+shuttle-root/generated/
 
 # TypeScript v1 declaration files
 typings/

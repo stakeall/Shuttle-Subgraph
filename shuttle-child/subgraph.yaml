@@ -6,9 +6,9 @@ dataSources:
     name: ChildPool
     network: mumbai
     source:
-      address: "{{childPoolAddress}}"
+      address: "0xd4f9c27952a1bf40a0e3fc1aaf0d4ebbce8c57bb"
       abi: ChildPool
-      startBlock: {{childPoolBlockNumber}}
+      startBlock: 25946241
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
