@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ jacobstakeall/shuttle-root",
-    "create-local": "graph create --node http://localhost:8020/ jacobstakeall/shuttle-root",
-    "remove-local": "graph remove --node http://localhost:8020/ jacobstakeall/shuttle-root",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 jacobstakeall/shuttle-root"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ stakeall/shuttle-root-goerli",
+    "create-local": "graph create --node http://localhost:8020/ stakeall/shuttle-root-goerli",
+    "remove-local": "graph remove --node http://localhost:8020/ stakeall/shuttle-root-goerli",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 stakeall/shuttle-root-goerli"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.28.0",
