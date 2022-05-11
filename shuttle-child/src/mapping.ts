@@ -106,11 +106,11 @@ export function handleShuttleArrived(event: ShuttleArrived): void {
 
   let shuttleEntity = Shuttle.load(shuttleId)!;
 
-  if (event.params._status === 4) {
+  if (event.params._status === 5) {
     shuttleEntity.status = "Cancelled";
   }
 
-  if (event.params._status === 2) {
+  if (event.params._status === 3) {
     shuttleEntity.status = "Arrived";
     shuttleEntity.receivedAmount = event.params._amount;
     shuttleEntity.fee = event.params._shuttleFee;
