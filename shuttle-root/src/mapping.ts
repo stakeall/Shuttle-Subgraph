@@ -46,6 +46,7 @@ export function handleShuttleProcessingInitiated(event: ShuttleProcessingInitiat
   }
 
   shuttleEntity.status = "Initiated";
+  shuttleEntity.shuttleNumber = event.params._shuttleNumber;
 
   let shuttleLifecycleEventEntity = new ShuttleLifecycleEvent(shuttleLifecycleId);
   shuttleLifecycleEventEntity.createdAt = event.block.timestamp.toI32();
