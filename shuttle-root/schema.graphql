@@ -1,0 +1,23 @@
+enum ShuttleStatus {
+  Initiated,
+  Processed,
+  Cancelled
+}
+
+type Shuttle @entity {
+  id: ID!
+  status: ShuttleStatus!
+  shuttleNumber: BigInt!
+  amount: BigInt!
+  receivedAmount: BigInt!
+  timeline: [ShuttleLifecycleEvent!]! @derivedFrom (field: "shuttle")
+}
+
+type ShuttleLifecycleEvent @entity {
+  id: ID!
+  status: ShuttleStatus!
+  shuttle: Shuttle!
+  txHash: Bytes!
+  createdAt: Int!
+  createdAtBlock: Int!
+}

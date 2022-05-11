@@ -1,0 +1,27 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: RootPool
+    network: goerli
+    source:
+      address: "{{RootPoolAddress}}"
+      abi: RootPool
+      startBlock: "{{rootPoolBlockNumber}}"
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Shuttle
+        - ShuttleLifecycleEvent
+      abis:
+        - name: RootPool
+          file: ./abis/RootPool.json
+      eventHandlers:
+        - event: ShuttleProcessed(uint256,uint256,uint256,uint8)
+          handler: handleShuttleProcessed
+        - event: ShuttleProcessingInitiated(uint256)
+          handler: handleShuttleProcessingInitiated
+      file: ./src/mapping.ts
