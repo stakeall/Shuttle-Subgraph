@@ -37,3 +37,27 @@ dataSources:
         - event: TokenClaimed(uint256,address,address,uint256)
           handler: handleTokenClaimed
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: Campaign
+    network: mumbai
+    source:
+      address: "{{campaignAddress}}"
+      abi: Campaign
+      startBlock: "{{campaignBlockNumber}}"
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyScript
+      entities:
+        - Campaign
+      abis:
+        - name: Campaign
+          file: ./abis/Campaign.json
+      eventHandlers:
+        - event: RewardClaimed(uint256,uint256,uint256,address)
+          handler: handleRewardClaimed
+        - event: CampaignCreated(uint256,uint256,uint256,uint256,uint256,address)
+          handler: handleCampaignCreated
+        - event: CampaignStatusModified(uint256,uint8)
+          handler: handleCampaignStatusModified
+      file: ./src/campaignMapping.ts

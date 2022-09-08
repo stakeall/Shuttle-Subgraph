@@ -11,6 +11,12 @@ enum Position {
   Claimed
 }
 
+enum CampaignStatus {
+  Active,
+  Paused
+  Deleted
+}
+
 """ 
 The ShuttleUser represents a User position in a Shuttle.
 """
@@ -56,6 +62,7 @@ type Shuttle @entity {
   users: [ShuttleUser!]! @derivedFrom (field: "shuttle")
   "ShuttleStatus transitions"
   timeline: [ShuttleLifecyleEvent!]! @derivedFrom (field: "shuttle")
+  campaign: Campaign
 }
 
 type User @entity {
@@ -63,4 +70,29 @@ type User @entity {
   id: ID!
   "Shuttles in which the user has positions"
   shuttles: [ShuttleUser!]! @derivedFrom (field: "user")
+}
+
+type Campaign @entity {
+  "Campaign Number"
+  id: ID!
+  endShuttle: BigInt!
+  startShuttle: BigInt!
+  campaignNumber: BigInt!
+  rewardToken: Bytes!
+  rewardAmount: BigInt!
+  claimedAmount: BigInt!
+  createdAt: Int!
+  createdAtBlock: Int!
+  status: CampaignStatus!
+  rewardAmountPerShuttle: BigInt!
+}
+
+type CampaignUser @entity {
+  "Concatenation of user address - shuttle number - campaign number"
+  id: ID!
+  claimedRewardAmount: BigInt!
+  claimed: Boolean!
+  claimedAt: Int!
+  campaign: Campaign!
+  user: ShuttleUser! 
 }
