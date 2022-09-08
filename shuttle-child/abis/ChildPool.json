@@ -4,6 +4,19 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "_campaignAddress",
+        "type": "address"
+      }
+    ],
+    "name": "CampaignChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "_shuttlesNumber",
         "type": "uint256"
@@ -272,6 +285,10 @@
     "type": "event"
   },
   {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
     "inputs": [],
     "name": "CANCEL_ROLE",
     "outputs": [
@@ -442,6 +459,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "campaign",
+    "outputs": [
+      {
+        "internalType": "contract ICampaign",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -481,6 +511,24 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_shuttleNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_campaignNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimWithRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "currentShuttle",
     "outputs": [
@@ -494,13 +542,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [],
     "name": "deposit",
     "outputs": [],
     "stateMutability": "payable",
@@ -564,6 +606,19 @@
     "outputs": [
       {
         "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fundCollector",
+    "outputs": [
+      {
+        "internalType": "contract IFundCollector",
         "name": "",
         "type": "address"
       }
@@ -650,6 +705,11 @@
         "type": "address"
       },
       {
+        "internalType": "contract IFundCollector",
+        "name": "_fundCollector",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
         "name": "_shuttleExpiry",
         "type": "uint256"
@@ -670,7 +730,7 @@
         "type": "address"
       }
     ],
-    "name": "init",
+    "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -747,12 +807,51 @@
   {
     "inputs": [
       {
+        "internalType": "contract ICampaign",
+        "name": "_campaign",
+        "type": "address"
+      }
+    ],
+    "name": "setCampaign",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_fundCollector",
+        "type": "address"
+      }
+    ],
+    "name": "setChildPoolFeeCollector",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_fee",
         "type": "uint256"
       }
     ],
     "name": "setFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_feeBeneficiary",
+        "type": "address"
+      }
+    ],
+    "name": "setFeeBeneficiary",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
