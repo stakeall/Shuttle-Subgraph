@@ -1,5 +1,30 @@
 [
   {
+    "inputs": [],
+    "name": "InactiveCampaign",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidCampaign",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotEnoughRewardAmount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SameCampaignStatus",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ShuttleNotPartOfCampaign",
+    "type": "error"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -572,6 +597,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "_rewardToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferUnusedRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
