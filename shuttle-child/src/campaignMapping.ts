@@ -10,10 +10,10 @@ export function handleCampaignCreated(event: CampaignCreated): void {
   let campaignEntity = new Campaign(event.params.campaignNumber.toString());
 
   campaignEntity.status = "Active";
-  campaignEntity.endShuttle = event.params.endShuttle;
-  campaignEntity.startShuttle = event.params.startShuttle;
+  campaignEntity.endShuttle = event.params.endShuttle.toI32();
+  campaignEntity.startShuttle = event.params.startShuttle.toI32();
 
-  campaignEntity.campaignNumber = event.params.campaignNumber;
+  campaignEntity.campaignNumber = event.params.campaignNumber.toI32();
 
   campaignEntity.rewardToken = event.params.rewardToken;
   campaignEntity.rewardAmount = event.params.totalRewardAmount;
