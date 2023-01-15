@@ -4,7 +4,8 @@ import {
   CampaignStatusModified,
 } from "../generated/Campaign/Campaign";
 
-import { Campaign, CampaignUser, Shuttle } from "../generated/schema";
+import {Campaign, CampaignUser, Shuttle } from "../generated/schema";
+import { createOrLoadCampaignMeta } from "./helpers";
 
 export function handleCampaignCreated(event: CampaignCreated): void {
   let campaignEntity = new Campaign(event.params.campaignNumber.toString());
@@ -52,6 +53,12 @@ export function handleRewardClaimed(event: RewardClaimed): void {
     event.params.rewardAmount
   );
 
+  let campaignMeta = createOrLoadCampaignMeta();
+
+  campaignMeta.totalRewardsClaimed = campaignMeta.totalRewardsClaimed.plus(
+    event.params.rewardAmount
+  );
+
   const campaignUserEntityId = `${event.params.sender.toHexString()}-${event.params.shuttleNumber.toString()}-${event.params.campaignNumber.toString()}`;
   let campaignUserEntity = CampaignUser.load(campaignUserEntityId);
 
@@ -73,4 +80,5 @@ export function handleRewardClaimed(event: RewardClaimed): void {
   campaignEntity.save();
   campaignUserEntity.save();
   shuttleEntity.save();
+  campaignMeta.save();
 }

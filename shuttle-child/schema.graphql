@@ -17,6 +17,11 @@ enum CampaignStatus {
   Deleted
 }
 
+type ShuttleStat @entity {
+  id: ID!
+  totalMaticProcessed: BigInt!
+}
+
 """ 
 The ShuttleUser represents a User position in a Shuttle.
 """
@@ -70,6 +75,11 @@ type User @entity {
   id: ID!
   "Shuttles in which the user has positions"
   shuttles: [ShuttleUser!]! @derivedFrom (field: "user")
+}
+
+type CampaignMeta @entity {
+  id: ID!
+  totalRewardsClaimed: BigInt!
 }
 
 type Campaign @entity {

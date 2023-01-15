@@ -9,7 +9,9 @@ import {
   ShuttleEnrouted,
   TokenClaimed,
 } from "../generated/ChildPool/ChildPool"
-import { Shuttle, ShuttleLifecyleEvent, ShuttleUser, User } from "../generated/schema"
+import { Shuttle, ShuttleLifecyleEvent, ShuttleUser, User, Campaign } from "../generated/schema"
+import { createOrLoadShuttleStat } from "./helpers";
+
 
 export function handleDeposit(event: Deposit): void {
   const userId = event.params._sender.toHexString();
@@ -105,6 +107,7 @@ export function handleShuttleArrived(event: ShuttleArrived): void {
   const shuttleId = event.params._shuttleNumber.toString();
 
   let shuttleEntity = Shuttle.load(shuttleId)!;
+  let shuttleStat = createOrLoadShuttleStat();
 
   if (event.params._status === 5) {
     shuttleEntity.status = "Cancelled";
@@ -114,6 +117,12 @@ export function handleShuttleArrived(event: ShuttleArrived): void {
     shuttleEntity.status = "Arrived";
     shuttleEntity.receivedAmount = event.params._amount;
     shuttleEntity.fee = event.params._shuttleFee;
+
+    shuttleStat.totalMaticProcessed = shuttleStat.totalMaticProcessed.plus(
+      shuttleEntity.amount
+    );
+
+    shuttleStat.save();
   }
   
   const shuttleLifecycleId = `${shuttleId}-${shuttleEntity.status}`;
